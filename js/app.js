@@ -15,3 +15,11 @@ renderer.setClearColor("#e5e5e5")
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 document.body.appendChild(renderer.domElement)
+
+//If size of the browser changes, the renderer should adjust accordingly
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    //Readjust aspect ratio
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectMatrix()
+})
