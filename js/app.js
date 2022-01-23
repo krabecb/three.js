@@ -28,7 +28,7 @@ window.addEventListener('resize', () => {
 //Use Three.js' primitive shapes
 //Two things to consider: form and texture
 //(size, width, height)
-let geometry = new THREE.SphereGeometry(1, 10, 10)
+let geometry = new THREE.BoxGeometry(1, 1, 1)
 let material = new THREE.MeshLambertMaterial({color: 0xFFCC00})
 
 //Combine geometry and material variables into a mesh
@@ -42,4 +42,12 @@ let light = new THREE.PointLight(0xFFFFFF, 1, 500)
 light.position.set(10, 0, 25)
 scene.add(light)
 
-renderer.render(scene, camera)
+let render = () => {
+    //Draw scene every time screen is refreshed - keeps shape proportions from adjusting
+    //when browser size changes
+    requestAnimationFrame(render)
+    mesh.rotation.x += 0.01
+    renderer.render(scene, camera)
+}
+
+render()
